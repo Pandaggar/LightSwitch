@@ -1,0 +1,44 @@
+#include <Arduino.h>
+#include <BleMouse.h>
+#define potPin 36
+#define cursorRange 100 //+&- 0
+BleMouse bleMouse;
+
+void setup() {
+  Serial.begin(9600);
+  bleMouse.begin();
+}
+
+void loop() {
+  float a = analogRead(potPin);
+  a = map(a,0,4095,-cursorRange,cursorRange);
+  Serial.println(a);
+  if(bleMouse.isConnected()) {
+    bleMouse.move(a,0);
+    delay(10);
+  }
+}
+
+
+#include <Arduino.h>
+#include <Arduino.h>
+#include <BleMouse.h>
+#define potPin 36
+#define cursorRange 100 //+&- 0
+BleMouse bleMouse;
+float b;
+void setup() {
+  Serial.begin(9600);
+  bleMouse.begin();
+}
+
+void loop() {
+  float a = analogRead(potPin);
+  a = map(a,0,4095,-cursorRange,cursorRange);
+  Serial.println(a);
+  if(bleMouse.isConnected()) {
+      bleMouse.move(((a/100)*20),0);
+      b=a;
+    delay(20);
+  }
+}
